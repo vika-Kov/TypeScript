@@ -1,0 +1,25 @@
+{
+  "name": "project-template",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vika-Kov/TypeScript.git"
+  },
+  "author": "Vika",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vika-Kov/TypeScript/issues"
+  },
+  "homepage": "https://github.com/vika-Kov/TypeScript#readme",
+  "dependencies": {
+    "node": "^17.3.0"
+  },
+  "devDependencies": {
+    "typescript": "^4.5.4"
+  }
+}
