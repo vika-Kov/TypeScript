@@ -1,10 +1,18 @@
 import { renderSearchFormBlock } from "./search-form.js";
 import { renderSearchStubBlock } from "./search-results.js";
 import { renderUserBlock } from "./user.js";
-import { renderToast } from "./lib.js";
+import { renderToast, getUserData, getFavoritesAmount } from "./lib.js";
+
+localStorage.setItem("userName", "Ivan Petrovich");
+localStorage.setItem("avatar", "./img/avatar.png");
+localStorage.setItem("favoriteItemsAmount", "20");
 
 window.addEventListener("DOMContentLoaded", () => {
-  renderUserBlock("Ivan Ivanovich", "./img/avatar.png", 0);
+  renderUserBlock(
+    getUserData()["userName"],
+    getUserData()["avatar"],
+    getFavoritesAmount()
+  );
   renderSearchFormBlock();
   renderSearchStubBlock();
   renderToast(

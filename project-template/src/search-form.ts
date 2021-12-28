@@ -1,4 +1,4 @@
-import { renderBlock } from "./lib.js";
+import { renderBlock, search, SearchFormData } from "./lib.js";
 /*renderSearchFormBlock и доработайте её следующим образом. Функция должна принимать дату въезда и дату выезда.
 При этом минимальная дата, которую можно выбрать это дата сегодняшнего дня, а максимальная дата -
 последний день следующего месяца. Будем считать это ограничениями сервиса.
@@ -32,6 +32,27 @@ function getNextMonth(startDate = new Date()): Date {
   return new Date(year, nextMonth, 0);
 }
 
+document
+  .querySelector("#search-form-block")
+  .addEventListener("submit", (event) => {
+    event.preventDefault();
+    const inputCity = document.querySelector("#city").value;
+    const inputCheckInDate = new Date(
+      document.querySelector("#check-in-date").value
+    );
+    const inputCheckOutDate = new Date(
+      document.querySelector("#check-out-date").value
+    );
+    const inputMaxPrice = document.querySelector("#max-price").value;
+    const currentSearch: SearchFormData = {
+      city: inputCity,
+      checkInDate: inputCheckInDate,
+      checkOutDate: inputCheckOutDate,
+      maxPrice: inputMaxPrice,
+    };
+    search(currentSearch);
+  });
+
 export function renderSearchFormBlock(
   checkInDate = new Date(0),
   checkOutDate = new Date(0)
@@ -50,7 +71,7 @@ export function renderSearchFormBlock(
   renderBlock(
     "search-form-block",
     `
-    <form>
+    <form >
       <fieldset class="search-fieldset">
         <div class="row">
           <div>
@@ -89,7 +110,7 @@ export function renderSearchFormBlock(
             <input id="max-price" type="text" value="" name="price" class="max-price" />
           </div>
           <div>
-            <div><button>Найти</button></div>
+            <div><button id="search-button" type="submit" >Найти</button></div>
           </div>
         </div>
       </fieldset>
