@@ -1,4 +1,5 @@
 import { renderBlock, search, SearchFormData } from "./lib.js";
+
 /*renderSearchFormBlock и доработайте её следующим образом. Функция должна принимать дату въезда и дату выезда.
 При этом минимальная дата, которую можно выбрать это дата сегодняшнего дня, а максимальная дата -
 последний день следующего месяца. Будем считать это ограничениями сервиса.
@@ -32,25 +33,33 @@ function getNextMonth(startDate = new Date()): Date {
   return new Date(year, nextMonth, 0);
 }
 
+function getFormData(): SearchFormData {
+  const inputCity = (document.querySelector("#city") as HTMLInputElement).value;
+  const inputCheckInDate = new Date(
+    (document.querySelector("#check-in-date") as HTMLInputElement).value
+  );
+  const inputCheckOutDate = new Date(
+    (document.querySelector("#check-out-date") as HTMLInputElement).value
+  );
+  let inputMaxPrice = parseFloat(
+    (document.querySelector("#max-price") as HTMLInputElement).value
+  );
+  if (!inputMaxPrice) {
+    inputMaxPrice = 0;
+  }
+  return {
+    city: inputCity,
+    checkInDate: inputCheckInDate,
+    checkOutDate: inputCheckOutDate,
+    maxPrice: inputMaxPrice,
+  };
+}
+
 document
   .querySelector("#search-form-block")
   .addEventListener("submit", (event) => {
     event.preventDefault();
-    const inputCity = document.querySelector("#city").value;
-    const inputCheckInDate = new Date(
-      document.querySelector("#check-in-date").value
-    );
-    const inputCheckOutDate = new Date(
-      document.querySelector("#check-out-date").value
-    );
-    const inputMaxPrice = document.querySelector("#max-price").value;
-    const currentSearch: SearchFormData = {
-      city: inputCity,
-      checkInDate: inputCheckInDate,
-      checkOutDate: inputCheckOutDate,
-      maxPrice: inputMaxPrice,
-    };
-    search(currentSearch);
+    search(getFormData());
   });
 
 export function renderSearchFormBlock(
@@ -58,7 +67,7 @@ export function renderSearchFormBlock(
   checkOutDate = new Date(0)
 ) {
   if (checkInDate.valueOf() === 0) {
-    checkInDate = getNextDate(2);
+    checkInDate = getNextDate(1);
   }
 
   if (checkOutDate.valueOf() === 0) {

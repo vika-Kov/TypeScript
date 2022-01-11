@@ -13,7 +13,7 @@ export function renderUserBlock(
     "user-block",
     `
     <div class="header-container">
-      <img class="avatar" src="${avatar}" alt="Wade Warren" />
+      <img class="avatar" src="${avatar}" alt="${userName}" />
       <div class="info">
           <p class="name">${userName}</p>
           <p class="fav">

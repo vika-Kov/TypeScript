@@ -1,3 +1,8 @@
+export interface userData {
+  userName: string;
+  avatar: string;
+}
+
 export function renderBlock(elementId, html) {
   const element = document.getElementById(elementId);
   element.innerHTML = html;
@@ -28,11 +33,8 @@ export function renderToast(message, action) {
   }
 }
 
-export function getUserData(): object {
-  return {
-    userName: localStorage.userName,
-    avatar: localStorage.avatar,
-  };
+export function getUserData(): userData {
+  return JSON.parse(localStorage.newUser);
 }
 
 export function getFavoritesAmount(): number {
