@@ -55,12 +55,15 @@ function getFormData(): SearchFormData {
   };
 }
 
-document
-  .querySelector("#search-form-block")
-  .addEventListener("submit", (event) => {
+const form: HTMLElement | null = document.querySelector("#search-form-block");
+if (form) {
+  form.addEventListener("submit", (event) => {
     event.preventDefault();
     search(getFormData());
   });
+} else {
+  console.log("There is no Search Form Block!");
+}
 
 export function renderSearchFormBlock(
   checkInDate = new Date(0),

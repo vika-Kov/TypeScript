@@ -3,12 +3,22 @@ export interface userData {
   avatar: string;
 }
 
-export function renderBlock(elementId, html) {
-  const element = document.getElementById(elementId);
+interface Message {
+  text: string;
+  type: string;
+}
+
+interface Action {
+  name: string;
+  handler: Function;
+}
+
+export function renderBlock(elementId: string, html: string) {
+  const element = document.getElementById(elementId) as HTMLElement;
   element.innerHTML = html;
 }
 
-export function renderToast(message, action) {
+export function renderToast(message: Message | null, action: Action | null) {
   let messageText = "";
 
   if (message != null) {
@@ -34,11 +44,11 @@ export function renderToast(message, action) {
 }
 
 export function getUserData(): userData {
-  return JSON.parse(localStorage.newUser);
+  return JSON.parse(localStorage["newUser"]);
 }
 
 export function getFavoritesAmount(): number {
-  return localStorage.favoriteItemsAmount;
+  return localStorage["favoriteItemsAmount"];
 }
 
 export interface SearchFormData {
